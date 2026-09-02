@@ -1,0 +1,40 @@
+{
+  "title": "System Health",
+  "uid": "system-health",
+  "schemaVersion": 39,
+  "time": {"from": "now-1h", "to": "now"},
+  "refresh": "15s",
+  "panels": [
+    {
+      "type": "stat",
+      "title": "API Status",
+      "gridPos": {"h": 4, "w": 6, "x": 0, "y": 0},
+      "targets": [{"expr": "up{job='inference-api'}"}],
+      "fieldConfig": {"defaults": {"mappings": [{"type": "value", "options": {"0": {"text": "DOWN", "color": "red"}, "1": {"text": "UP", "color": "green"}}}]}}
+    },
+    {
+      "type": "timeseries",
+      "title": "Kafka Consumer Lag",
+      "gridPos": {"h": 8, "w": 12, "x": 0, "y": 4},
+      "targets": [{"expr": "kafka_consumer_lag", "legendFormat": "{{topic}}-{{partition}}"}]
+    },
+    {
+      "type": "timeseries",
+      "title": "Messages Produced",
+      "gridPos": {"h": 8, "w": 12, "x": 12, "y": 4},
+      "targets": [{"expr": "rate(sensor_messages_produced_total[1m])", "legendFormat": "{{topic}}"}]
+    },
+    {
+      "type": "timeseries",
+      "title": "Data Quality Null Rate",
+      "gridPos": {"h": 8, "w": 12, "x": 0, "y": 12},
+      "targets": [{"expr": "data_quality_null_rate", "legendFormat": "{{field}}"}]
+    },
+    {
+      "type": "timeseries",
+      "title": "Producer Errors",
+      "gridPos": {"h": 8, "w": 12, "x": 12, "y": 12},
+      "targets": [{"expr": "rate(sensor_producer_errors_total[5m])", "legendFormat": "{{error_type}}"}]
+    }
+  ]
+}

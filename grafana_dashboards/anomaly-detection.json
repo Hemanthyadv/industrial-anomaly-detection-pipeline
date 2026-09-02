@@ -1,0 +1,27 @@
+{
+  "title": "Anomaly Detection",
+  "uid": "anomaly-detection",
+  "schemaVersion": 39,
+  "time": {"from": "now-6h", "to": "now"},
+  "refresh": "30s",
+  "panels": [
+    {
+      "type": "timeseries",
+      "title": "Anomalies Detected Over Time",
+      "gridPos": {"h": 8, "w": 24, "x": 0, "y": 0},
+      "targets": [{"expr": "rate(sensor_anomalies_detected_total[5m])", "legendFormat": "{{model_version}}"}]
+    },
+    {
+      "type": "timeseries",
+      "title": "Anomaly Rate",
+      "gridPos": {"h": 8, "w": 12, "x": 0, "y": 8},
+      "targets": [{"expr": "sensor_anomaly_rate"}]
+    },
+    {
+      "type": "timeseries",
+      "title": "Data Quality Failures",
+      "gridPos": {"h": 8, "w": 12, "x": 12, "y": 8},
+      "targets": [{"expr": "rate(data_quality_failures_total[5m])", "legendFormat": "{{check_type}}"}]
+    }
+  ]
+}

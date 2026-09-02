@@ -1,0 +1,20 @@
+FROM python:3.11-slim
+
+WORKDIR /app
+
+# Install only API dependencies (lighter image)
+COPY requirements-api.txt ./
+RUN pip install --default-timeout=1000 --no-cache-dir -r requirements-api.txt
+
+COPY src ./src
+
+# Create models directory (populated via volume mount)
+RUN mkdir -p /app/models
+
+EXPOSE 8000
+
+# Run as non-root user
+RUN useradd -m appuser
+USER appuser
+
+CMD ["uvicorn", "src.api.inference_server:app", "--host", "0.0.0.0", "--port", "8000"]

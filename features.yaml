@@ -1,0 +1,81 @@
+features:
+  rolling_mean_5m:
+    description: Mean sensor value over a 5-minute event-time window.
+    data_type: double
+    source: spark_streaming
+    version: "1.0"
+  rolling_min_5m:
+    description: Minimum sensor value over a 5-minute event-time window.
+    data_type: double
+    source: spark_streaming
+    version: "1.0"
+  rolling_max_5m:
+    description: Maximum sensor value over a 5-minute event-time window.
+    data_type: double
+    source: spark_streaming
+    version: "1.0"
+  rolling_var_5m:
+    description: Sample variance over five minutes.
+    data_type: double
+    source: spark_streaming
+    version: "1.0"
+  rolling_stddev_5m:
+    description: Standard deviation over five minutes.
+    data_type: double
+    source: spark_streaming
+    version: "1.0"
+  rolling_skewness_5m:
+    description: Skewness over five minutes.
+    data_type: double
+    source: spark_streaming
+    version: "1.0"
+  rolling_kurtosis_5m:
+    description: Kurtosis over five minutes.
+    data_type: double
+    source: spark_streaming
+    version: "1.0"
+  rolling_mean_1h:
+    description: Mean sensor value over a one-hour event-time window.
+    data_type: double
+    source: spark_streaming
+    version: "1.0"
+  rolling_min_1h:
+    description: Minimum sensor value over a one-hour window.
+    data_type: double
+    source: spark_streaming
+    version: "1.0"
+  rolling_max_1h:
+    description: Maximum sensor value over a one-hour window.
+    data_type: double
+    source: spark_streaming
+    version: "1.0"
+  rolling_var_1h:
+    description: Sample variance over one hour.
+    data_type: double
+    source: spark_streaming
+    version: "1.0"
+  lag_t1:
+    description: Sensor value from 1 minute prior (time-aligned, not row-based).
+    data_type: double
+    source: spark_streaming
+    version: "1.0"
+  lag_t5:
+    description: Sensor value from 5 minutes prior (time-aligned).
+    data_type: double
+    source: spark_streaming
+    version: "1.0"
+  lag_t60:
+    description: Sensor value from 60 minutes prior (time-aligned).
+    data_type: double
+    source: spark_streaming
+    version: "1.0"
+  rate_of_change:
+    description: First derivative - difference from the previous 1-minute mean.
+    data_type: double
+    source: spark_streaming
+    version: "1.0"
+  acceleration:
+    description: Second derivative - change of rate of change.
+    data_type: double
+    source: spark_streaming
+    version: "1.0"

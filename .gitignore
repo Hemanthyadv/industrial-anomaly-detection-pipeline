@@ -1,0 +1,14 @@
+.venv/
+__pycache__/
+.pytest_cache/
+.coverage
+htmlcov/
+.env
+*.pyc
+models/*.joblib
+checkpoints/
+spark-warehouse/
+data/*.parquet
+data/*.csv
+mlruns/
+.DS_Store

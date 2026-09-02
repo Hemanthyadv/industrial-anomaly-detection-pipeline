@@ -1,0 +1,12 @@
+{
+  "type": "record",
+  "name": "SensorEvent",
+  "namespace": "industrial.iot",
+  "fields": [
+    {"name": "timestamp", "type": "long", "logicalType": "timestamp-millis"},
+    {"name": "sensor_id", "type": "string"},
+    {"name": "value", "type": "double"},
+    {"name": "unit", "type": "string"},
+    {"name": "metadata", "type": {"type": "map", "values": "string"}}
+  ]
+}

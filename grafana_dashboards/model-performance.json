@@ -1,0 +1,34 @@
+{
+  "title": "Model Performance",
+  "uid": "model-performance",
+  "schemaVersion": 39,
+  "time": {"from": "now-24h", "to": "now"},
+  "refresh": "1m",
+  "panels": [
+    {
+      "type": "stat",
+      "title": "Model Drift Score",
+      "gridPos": {"h": 4, "w": 8, "x": 0, "y": 0},
+      "targets": [{"expr": "model_drift_score"}],
+      "fieldConfig": {"defaults": {"thresholds": {"steps": [{"color": "green", "value": 0}, {"color": "yellow", "value": 0.3}, {"color": "red", "value": 0.5}]}}}
+    },
+    {
+      "type": "stat",
+      "title": "Model Info",
+      "gridPos": {"h": 4, "w": 8, "x": 8, "y": 0},
+      "targets": [{"expr": "ml_model_info"}]
+    },
+    {
+      "type": "timeseries",
+      "title": "Forecast Error (MAE)",
+      "gridPos": {"h": 8, "w": 12, "x": 0, "y": 4},
+      "targets": [{"expr": "forecast_error_metric", "legendFormat": "{{sensor_type}}"}]
+    },
+    {
+      "type": "timeseries",
+      "title": "Prediction Latency Distribution",
+      "gridPos": {"h": 8, "w": 12, "x": 12, "y": 4},
+      "targets": [{"expr": "rate(prediction_latency_seconds_sum[5m]) / rate(prediction_latency_seconds_count[5m])", "legendFormat": "avg latency"}]
+    }
+  ]
+}

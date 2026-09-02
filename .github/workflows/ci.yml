@@ -1,0 +1,67 @@
+name: CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+  schedule:
+    - cron: "0 2 * * *"  # Daily at 2 AM UTC
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - run: pip install ruff
+      - run: ruff check src/ tests/ scripts/ --select E,F,W --ignore E501
+
+  test:
+    runs-on: ubuntu-latest
+    needs: lint
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - run: pip install -r requirements-dev.txt
+      - run: mkdir -p models
+      - run: pytest -q --cov=src --cov-report=term-missing --tb=short
+      - name: Check coverage threshold
+        run: |
+          coverage=$(pytest --cov=src --cov-report=term 2>/dev/null | grep TOTAL | awk '{print $NF}' | tr -d '%')
+          echo "Coverage: ${coverage}%"
+
+  docker-validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker compose config -q
+
+  train:
+    if: github.event_name == 'schedule'
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - run: mkdir -p models data
+      - name: Generate training data
+        run: python -m src.kafka.sensor_simulator --days 7 --sensors 120 --output data/training_data.csv
+      - name: Train models
+        run: python -m src.ml.train_models --output-dir models --data data/training_data.csv
+      - name: Upload model artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: trained-models
+          path: models/
+          retention-days: 30

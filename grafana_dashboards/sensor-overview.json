@@ -1,0 +1,51 @@
+{
+  "title": "Real-Time Sensor Metrics",
+  "uid": "sensor-realtime",
+  "schemaVersion": 39,
+  "time": {"from": "now-1h", "to": "now"},
+  "refresh": "10s",
+  "panels": [
+    {
+      "type": "timeseries",
+      "title": "Prediction Request Rate",
+      "gridPos": {"h": 8, "w": 12, "x": 0, "y": 0},
+      "targets": [{"expr": "rate(prediction_requests_total[1m])", "legendFormat": "{{endpoint}}"}]
+    },
+    {
+      "type": "timeseries",
+      "title": "Prediction Latency (p50/p95/p99)",
+      "gridPos": {"h": 8, "w": 12, "x": 12, "y": 0},
+      "targets": [
+        {"expr": "histogram_quantile(0.50, rate(prediction_latency_seconds_bucket[5m]))", "legendFormat": "p50"},
+        {"expr": "histogram_quantile(0.95, rate(prediction_latency_seconds_bucket[5m]))", "legendFormat": "p95"},
+        {"expr": "histogram_quantile(0.99, rate(prediction_latency_seconds_bucket[5m]))", "legendFormat": "p99"}
+      ]
+    },
+    {
+      "type": "stat",
+      "title": "Total Predictions",
+      "gridPos": {"h": 4, "w": 6, "x": 0, "y": 8},
+      "targets": [{"expr": "prediction_requests_total"}]
+    },
+    {
+      "type": "stat",
+      "title": "Total Anomalies",
+      "gridPos": {"h": 4, "w": 6, "x": 6, "y": 8},
+      "targets": [{"expr": "sensor_anomalies_detected_total"}]
+    },
+    {
+      "type": "gauge",
+      "title": "Anomaly Rate",
+      "gridPos": {"h": 4, "w": 6, "x": 12, "y": 8},
+      "targets": [{"expr": "sensor_anomaly_rate"}],
+      "fieldConfig": {"defaults": {"min": 0, "max": 1, "thresholds": {"steps": [{"color": "green", "value": 0}, {"color": "yellow", "value": 0.1}, {"color": "red", "value": 0.3}]}}}
+    },
+    {
+      "type": "gauge",
+      "title": "Data Freshness",
+      "gridPos": {"h": 4, "w": 6, "x": 18, "y": 8},
+      "targets": [{"expr": "data_freshness_seconds"}],
+      "fieldConfig": {"defaults": {"unit": "s", "min": 0, "max": 600, "thresholds": {"steps": [{"color": "green", "value": 0}, {"color": "yellow", "value": 60}, {"color": "red", "value": 300}]}}}
+    }
+  ]
+}

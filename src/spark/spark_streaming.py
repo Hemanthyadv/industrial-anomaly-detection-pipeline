@@ -98,7 +98,7 @@ def run():
     features_1h = add_1hour_tumbling_features(watermarked)
 
     # --- Write 5-min features to Delta Lake ---
-    query_5m = (
+    (
         features_5m.writeStream.format("delta")
         .outputMode("append")
         .option("checkpointLocation", f"{CHECKPOINT_BASE}/features_5m")
@@ -108,7 +108,7 @@ def run():
     )
 
     # --- Write 1-hour features to Delta Lake ---
-    query_1h = (
+    (
         features_1h.writeStream.format("delta")
         .outputMode("append")
         .option("checkpointLocation", f"{CHECKPOINT_BASE}/features_1h")
@@ -118,7 +118,7 @@ def run():
     )
 
     # --- Write processed events to Kafka ---
-    processed_kafka = (
+    (
         features_5m.select(
             F.col("sensor_id").alias("key"),
             F.to_json(F.struct("*")).alias("value"),

@@ -6,9 +6,6 @@ Uses Spark Structured Streaming windowed aggregations:
 
 This module provides both streaming-compatible and batch-compatible feature functions.
 """
-import os
-from typing import Optional
-
 try:
     from pyspark.sql import DataFrame, SparkSession, functions as F
     from pyspark.sql.types import DoubleType, StringType, StructField, StructType, TimestampType

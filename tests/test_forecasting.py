@@ -1,4 +1,4 @@
-﻿"""Tests for forecasting helpers."""
+"""Tests for forecasting helpers."""
 import pandas as pd
 from src.ml.forecasting import prepare_prophet_data
 

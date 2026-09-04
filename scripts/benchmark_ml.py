@@ -16,7 +16,6 @@ sys.path.insert(0, ".")
 def benchmark_ml(data_path: str = "data/sample_sensor_data.csv", output_dir: str = "models") -> dict:
     """Run ML benchmark: train, evaluate, measure inference speed."""
     from src.ml.train_models import train_all, make_dataset, load_training_data
-    import numpy as np
     import joblib
 
     # Load data

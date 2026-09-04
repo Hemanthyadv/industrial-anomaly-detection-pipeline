@@ -22,7 +22,6 @@ except ImportError:
 import numpy as np
 import pandas as pd
 from sklearn.ensemble import IsolationForest
-from sklearn.metrics import f1_score
 from sklearn.neighbors import LocalOutlierFactor
 from sklearn.neural_network import MLPRegressor
 from sklearn.pipeline import Pipeline
@@ -366,13 +365,12 @@ def train_all(
     else:
         joblib.dump(ae_bundle, output / "best_model.joblib")
 
-
     return results
 
 
 def train(output: str = "models/isolation_forest.joblib") -> str:
     """Legacy single-model training entrypoint."""
-    results = train_all(output_dir=str(Path(output).parent))
+    train_all(output_dir=str(Path(output).parent))
     return output
 
 

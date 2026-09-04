@@ -21,8 +21,6 @@ from prometheus_client import make_asgi_app
 
 from src.monitoring import (
     ANOMALIES_DETECTED,
-    ANOMALY_RATE,
-    MODEL_DRIFT,
     MODEL_INFO,
     PREDICTION_LATENCY,
     PREDICTION_REQUESTS,

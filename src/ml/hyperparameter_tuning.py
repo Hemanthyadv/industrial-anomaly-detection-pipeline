@@ -9,9 +9,8 @@ model unsupervised and then evaluate against known injected anomalies.
 """
 import logging
 import os
-from typing import Dict, List, Tuple
+from typing import Dict, Tuple
 
-import mlflow
 import numpy as np
 from sklearn.ensemble import IsolationForest
 from sklearn.metrics import f1_score

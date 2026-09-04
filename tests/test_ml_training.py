@@ -1,4 +1,4 @@
-﻿"""Tests for ML training components."""
+"""Tests for ML training components."""
 import numpy as np
 from src.ml.train_models import (
     make_dataset,

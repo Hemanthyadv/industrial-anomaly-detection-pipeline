@@ -3,12 +3,10 @@ import json
 import logging
 import os
 import signal
-import sys
 import time
-from datetime import datetime, timezone
-from typing import Iterable, Optional
+from typing import Iterable
 
-from confluent_kafka import KafkaError, KafkaException, Producer
+from confluent_kafka import Producer
 
 LOG = logging.getLogger("sensor-producer")
 logging.basicConfig(

@@ -6,7 +6,6 @@ Run with: python scripts/benchmark_api.py [--url URL] [--requests N]
 import argparse
 import json
 import statistics
-import sys
 import time
 import urllib.request
 

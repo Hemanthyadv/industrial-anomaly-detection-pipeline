@@ -4,7 +4,7 @@ Provides validation, null detection, outlier detection, and quarantine
 functionality for the sensor data pipeline.
 """
 import logging
-from typing import Dict, List, Optional, Set
+from typing import Dict, Set
 
 try:
     from pyspark.sql import DataFrame, functions as F
@@ -119,7 +119,7 @@ def compute_quality_metrics_batch(df: DataFrame) -> Dict[str, float]:
         return {"total": 0, "null_rate": 0.0, "invalid_rate": 0.0}
 
     null_count = df.filter(F.col("value").isNull()).count()
-    invalid_sensor = df.filter(~F.col("sensor_id").rlike(VALID_SENSOR_PATTERN)).count()
+    invalid_sensor = df.filter(~df["sensor_id"].rlike(VALID_SENSOR_PATTERN)).count()
 
     return {
         "total": total,

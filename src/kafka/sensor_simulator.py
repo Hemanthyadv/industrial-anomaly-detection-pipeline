@@ -13,7 +13,7 @@ import os
 import random
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
-from typing import Dict, Generator, List, Optional
+from typing import Dict, Generator, Optional
 
 UNITS = {"temperature": "C", "pressure": "bar", "vibration": "mm/s"}
 SENSOR_COUNT = int(os.getenv("SENSOR_COUNT", "120"))

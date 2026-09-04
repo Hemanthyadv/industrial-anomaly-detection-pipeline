@@ -1,5 +1,4 @@
 """Tests for feature store registry."""
-import json
 import os
 import tempfile
 

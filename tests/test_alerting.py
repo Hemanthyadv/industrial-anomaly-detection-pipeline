@@ -1,4 +1,4 @@
-﻿"""Tests for alert rule export and definitions."""
+"""Tests for alert rule export and definitions."""
 import os
 import tempfile
 from src.alerting import RULES, export_rules_yaml

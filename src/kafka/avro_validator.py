@@ -24,13 +24,13 @@ def _load_schema() -> dict:
 
 def validate_event(event: Dict[str, Any]) -> bool:
     """Validate a sensor event dict against the Avro schema.
-    
+
     Args:
         event: Sensor event dictionary with keys: timestamp, sensor_id, value, unit, metadata.
-    
+
     Returns:
         True if valid.
-    
+
     Raises:
         ValueError: If the event fails schema validation.
     """
@@ -46,10 +46,10 @@ def validate_event(event: Dict[str, Any]) -> bool:
 
 def serialize_event(event: Dict[str, Any]) -> bytes:
     """Serialize a sensor event to Avro binary format.
-    
+
     Args:
         event: Valid sensor event dictionary.
-    
+
     Returns:
         Avro-serialized bytes.
     """
@@ -61,10 +61,10 @@ def serialize_event(event: Dict[str, Any]) -> bytes:
 
 def deserialize_event(data: bytes) -> Dict[str, Any]:
     """Deserialize Avro binary data back to a sensor event dict.
-    
+
     Args:
         data: Avro-serialized bytes.
-    
+
     Returns:
         Deserialized sensor event dictionary.
     """

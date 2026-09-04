@@ -1,5 +1,4 @@
 """Tests for data quality checks (batch mode)."""
-import pytest
 
 
 def test_validate_schema_passes():

@@ -3,7 +3,6 @@
 This module defines alert rules as Python data structures and provides
 a function to export them as Prometheus-compatible YAML.
 """
-import os
 import yaml
 from pathlib import Path
 from typing import List, Dict, Any
